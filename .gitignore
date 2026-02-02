@@ -1,0 +1,9 @@
+# Surfer token and other temp secrets - never commit
+docs/temp/
+
+# macOS
+.DS_Store
+
+# Banner assets: only source/banner_ads is canonical; build copies to public/banner-ads
+public/banner-ads/*
+!public/banner-ads/.gitkeep

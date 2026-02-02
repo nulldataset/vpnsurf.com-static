@@ -1,0 +1,56 @@
+# Deploy public/ to Cloudron Surfer.
+# Requires one repo secret: SURFER_TOKEN (create in Surfer app → Settings → Access Token).
+# Set repository variable SURFER_SERVER (e.g. https://yourdomain.com) for your site; otherwise the default below is used.
+name: Deploy to Surfer
+
+on:
+  push:
+    branches: [main, master]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    env:
+      SURFER_SERVER: ${{ vars.SURFER_SERVER || 'https://yourdomain.com' }}
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install Surfer CLI
+        run: npm install -g cloudron-surfer
+
+      - name: Run build
+        run: ./build.sh
+
+      - name: Verify Surfer connection
+        env:
+          SURFER_TOKEN: ${{ secrets.SURFER_TOKEN }}
+        run: |
+          SURFER_TOKEN=$(printf '%s' "$SURFER_TOKEN" | tr -d '\n\r')
+          if [ -z "$SURFER_TOKEN" ]; then
+            echo "::error::SURFER_TOKEN must be set in repo secrets (Settings → Secrets and variables → Actions)"
+            exit 1
+          fi
+          echo "Uploading single file to verify connection..."
+          surfer put --token "$SURFER_TOKEN" --server "$SURFER_SERVER" public/index.html /
+          echo "Connection OK."
+
+      - name: Deploy to Surfer
+        env:
+          SURFER_TOKEN: ${{ secrets.SURFER_TOKEN }}
+        run: |
+          set -e
+          SURFER_TOKEN=$(printf '%s' "$SURFER_TOKEN" | tr -d '\n\r')
+          put() { surfer put --token "$SURFER_TOKEN" --server "$SURFER_SERVER" "$@" /; }
+          echo "Uploading root files..."
+          put public/*.html public/sitemap.xml public/robots.txt public/favicon.png
+          for dir in public/*/; do
+            echo "Uploading $dir..."
+            put "$dir"
+          done
