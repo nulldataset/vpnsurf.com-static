@@ -27,16 +27,15 @@ The snippet is a `<script>...</script>` block. The build script reads this file 
 - **Location:** The script is injected **just before `</body>`** on each target page.
 - **Exact pattern:** The injector looks for `</script>\n</body>` and inserts the Chatwoot snippet between them. Your HTML must contain that pattern (e.g. a closing `</script>` followed by a newline and `</body>`).
 - **Default target pages:** By default the script runs only on:
-  - `public/blog/*.html`
-  - `public/science/*.html`
+  - `public/articles/*.html`
 
-If your site uses different paths (e.g. no `blog/` or `science/`), you need to edit **`integrations/chatwoot/add_chatwoot.py`** to target your pages (see below).
+If your site uses different paths, edit **`integrations/chatwoot/add_chatwoot.py`** to target your pages (see below).
 
 ---
 
 ## How to add the widget to more pages
 
-1. **Edit the injector:** Open **`integrations/chatwoot/add_chatwoot.py`**. In `main()`, the script loops over subdirs `("blog", "science")` and globs `*.html` in each. Add your subdirs (e.g. `"docs"`, `"articles"`) or change the glob to match your structure.
+1. **Edit the injector:** Open **`integrations/chatwoot/add_chatwoot.py`**. In `main()`, the script loops over subdirs (by default `("articles",)`) and globs `*.html` in each. Add more subdirs (e.g. `"docs"`) or change the glob to match your structure.
 2. **Ensure HTML pattern:** Each target page must contain `</script>\n</body>` so the injector can insert the snippet. Most templates that have a script block before `</body>` already do.
 3. **Run the build:** Run `./build.sh` or `python3 integrations/chatwoot/add_chatwoot.py`. The script will inject the snippet into all matching pages that don’t already have `chatwootSDK` in them.
 

@@ -28,7 +28,7 @@ def add_to_file(path: Path) -> bool:
 
 def main():
     count = 0
-    for subdir in ("blog", "science"):
+    for subdir in ("articles",):
         for f in (PUBLIC / subdir).glob("*.html"):
             if add_to_file(f):
                 count += 1

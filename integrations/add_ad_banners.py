@@ -5,14 +5,22 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 PUBLIC = ROOT / "public"
-# For pages in public/blog/ and public/science/, banner path is ../banner-ads/
+# For pages in public/articles/, banner path is ../banner-ads/
 BANNER_PREFIX = "../banner-ads/"
-TOP_BANNER = f'''      <div class="ad-banner ad-banner-top w-full flex justify-center bg-slate-900/80 py-2 border-b border-slate-800">
-        <a href="https://gdfn.com" target="_blank" rel="noopener noreferrer" class="block" aria-label="Advertisement"><img src="{BANNER_PREFIX}gdfn.com-728x90-xyz.gif" width="728" height="90" alt="Advertisement" class="max-w-full h-auto"/></a>
+TOP_BANNER = f'''      <div class="ad-banner ad-banner-top w-full bg-neutral-900/80 border-y border-neutral-800 py-3">
+        <div class="container px-4 mx-auto max-w-4xl">
+          <a href="https://gdfn.com" target="_blank" rel="noopener noreferrer" class="block rounded-lg overflow-hidden border border-neutral-700 shadow-lg hover:border-neutral-600 transition-colors" aria-label="Advertisement">
+            <img src="{BANNER_PREFIX}gdfn.com-728x90-xyz.gif" width="728" height="90" alt="Advertisement" class="w-full h-auto block"/>
+          </a>
+        </div>
       </div>
 '''
-BOTTOM_BANNER = f'''      <div class="ad-banner ad-banner-bottom w-full flex justify-center bg-slate-900/80 py-2 border-t border-slate-800">
-        <a href="https://gdfn.com" target="_blank" rel="noopener noreferrer" class="block" aria-label="Advertisement"><img src="{BANNER_PREFIX}gdfn.com-728x90-xyz.gif" width="728" height="90" alt="Advertisement" class="max-w-full h-auto"/></a>
+BOTTOM_BANNER = f'''      <div class="ad-banner ad-banner-bottom w-full bg-neutral-900/80 border-y border-neutral-800 py-3">
+        <div class="container px-4 mx-auto max-w-4xl">
+          <a href="https://gdfn.com" target="_blank" rel="noopener noreferrer" class="block rounded-lg overflow-hidden border border-neutral-700 shadow-lg hover:border-neutral-600 transition-colors" aria-label="Advertisement">
+            <img src="{BANNER_PREFIX}gdfn.com-728x90-xyz.gif" width="728" height="90" alt="Advertisement" class="w-full h-auto block"/>
+          </a>
+        </div>
       </div>
 '''
 
@@ -37,7 +45,7 @@ def add_to_file(path: Path) -> bool:
 
 def main():
     count = 0
-    for subdir in ("blog", "science"):
+    for subdir in ("articles",):
         for f in (PUBLIC / subdir).glob("*.html"):
             if add_to_file(f):
                 count += 1

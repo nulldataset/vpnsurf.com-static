@@ -1,6 +1,10 @@
 # Surfer token and other temp secrets - never commit
 docs/temp/
 
+# Local inputs per site (token + site URL) - never commit
+local/surfer-token
+local/site-url.txt
+
 # macOS
 .DS_Store
 

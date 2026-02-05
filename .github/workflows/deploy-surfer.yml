@@ -41,16 +41,12 @@ jobs:
           surfer put --token "$SURFER_TOKEN" --server "$SURFER_SERVER" public/index.html /
           echo "Connection OK."
 
+      # Cloudron docs: surfer put build/* / uploads contents of build to Surfer root
       - name: Deploy to Surfer
         env:
           SURFER_TOKEN: ${{ secrets.SURFER_TOKEN }}
         run: |
           set -e
           SURFER_TOKEN=$(printf '%s' "$SURFER_TOKEN" | tr -d '\n\r')
-          put() { surfer put --token "$SURFER_TOKEN" --server "$SURFER_SERVER" "$@" /; }
-          echo "Uploading root files..."
-          put public/*.html public/sitemap.xml public/robots.txt public/favicon.png
-          for dir in public/*/; do
-            echo "Uploading $dir..."
-            put "$dir"
-          done
+          echo "Uploading public/ to Surfer..."
+          surfer put --token "$SURFER_TOKEN" --server "$SURFER_SERVER" public/* /

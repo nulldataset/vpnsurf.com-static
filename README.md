@@ -17,11 +17,15 @@ This repo is the **surfer-static** GitHub template for building static websites 
 
 **First-time checklist:** [ ] Use template → create repo. [ ] Add content to `public/`. [ ] Set **SURFER_TOKEN** (secret) and **SURFER_SERVER** (variable) in repo Settings → Actions. [ ] Push to `main` or `master`. Optional: [ ] Run `./build.sh` if using Chatwoot or banner ads.
 
+**Quick start from the command line:** Use **`local/`** (token + site URL) and **`./scripts/setup-deploy.sh`** to configure deploy in one step. See [docs/QUICKSTART_CLI.md](docs/QUICKSTART_CLI.md).
+
+**New site flow (full stack):** GoDaddy → Cloudflare (DNS) → Cloudron (add domain, install Surfer, create token) → new repo from this template → fill `local/surfer-token` and `local/site-url.txt` → run `./scripts/setup-deploy.sh` → push to deploy. Manual vs automated breakdown: [docs/NEW_SITE_FLOW.md](docs/NEW_SITE_FLOW.md).
+
 ---
 
 ## What’s included
 
-- **Static site** — Placeholder content in `public/`. Add your own HTML/CSS/JS (e.g. from a Tailwind template zip).
+- **Static site** — Placeholder content in `public/`. **`template/`** holds the example site template (e.g. Tailwind 4 CSS + HTML) — add your theme there; an LLM can use it with content from **`source/`** (articles, pictures, videos) to build the complete site in `public/`. Run **`./build.sh`** to copy source content to `public/`. See [template/README.md](template/README.md).
 - **Cloudron Surfer** — Serves the contents of `public/` at your domain.
 - **GitHub Actions** — On push to `main`/`master`, runs the deploy workflow and uploads `public/` to the Surfer app via the `cloudron-surfer` CLI.
 - **Chatwoot** — `integrations/chatwoot/` holds the snippet; `integrations/chatwoot/add_chatwoot.py` injects it into target HTML. See [integrations/chatwoot/README.md](integrations/chatwoot/README.md) for how to embed and configure.
@@ -76,7 +80,7 @@ No need to re-enter the token; the workflow uses the `SURFER_TOKEN` secret.
 
 ## Security
 
-- Keep the Surfer token only in GitHub Actions secrets (and optionally in `docs/temp/` for local CLI use; that path is gitignored).
+- Keep the Surfer token only in GitHub Actions secrets and in **`local/surfer-token`** (gitignored) for running **`./scripts/setup-deploy.sh`**; optionally in `docs/temp/` for local Surfer CLI use.
 - See [docs/SURFER_TOKEN_SECURITY.md](docs/SURFER_TOKEN_SECURITY.md) for details.
 
 ---
@@ -86,6 +90,8 @@ No need to re-enter the token; the workflow uses the `SURFER_TOKEN` secret.
 | Doc | Purpose |
 |-----|---------|
 | [AGENTS.md](AGENTS.md) | High-level plan for this template (purpose, flow, per-repo config, integrations). **Refer to this for LLM/agent context.** |
+| [docs/QUICKSTART_CLI.md](docs/QUICKSTART_CLI.md) | New site from template using `local/` and `./scripts/setup-deploy.sh` (gh CLI). |
+| [docs/NEW_SITE_FLOW.md](docs/NEW_SITE_FLOW.md) | Full stack: GoDaddy → Cloudflare → Cloudron → Surfer → GitHub; manual vs automated. |
 | [docs/BUILD_AND_DEPLOY.md](docs/BUILD_AND_DEPLOY.md) | Build order and deploy (Actions, Surfer CLI, local deploy). |
 | [docs/SURFER_TOKEN_SECURITY.md](docs/SURFER_TOKEN_SECURITY.md) | Where the Surfer secret key lives; how to set it. |
 | [docs/BANNER_ADS.md](docs/BANNER_ADS.md) | 728×90 top header and bottom footer; placement; how to replace. |

@@ -11,14 +11,14 @@ How to use and place 728×90 (leaderboard) ad banners on your static site.
   - **Top header:** One 728×90 banner at the **top** of the main content area, immediately after the main navigation (`</nav>`) and before the main content (e.g. before the first `<section>`).
   - **Bottom footer:** One 728×90 banner at the **bottom** of the page, immediately before the closing wrapper and script block (e.g. after `</footer>` and before the main `</div>` and `<script>` that loads your JS).
 
-The build script **`integrations/add_ad_banners.py`** injects these two banners into target HTML pages. By default it targets `public/blog/*.html` and `public/science/*.html`. If your template uses different paths or a different HTML structure, you must edit the script (see below).
+The build script **`integrations/add_ad_banners.py`** injects these two banners into target HTML pages. By default it targets `public/articles/*.html`. If your template uses different paths or a different HTML structure, you must edit the script (see below).
 
 ---
 
 ## Where assets live
 
 - **Source:** Banner ad assets (GIFs or images) live in **`source/banner_ads/`**.
-- **Build:** When you run **`./build.sh`**, the contents of `source/banner_ads/` are copied to **`public/banner-ads/`**. The live site serves from `public/`, so pages reference banners as `banner-ads/...` (or `../banner-ads/...` from subdirs like `blog/` or `science/`).
+- **Build:** When you run **`./build.sh`**, the contents of `source/banner_ads/` are copied to **`public/banner-ads/`**. The live site serves from `public/`, so pages reference banners as `banner-ads/...` (or `../banner-ads/...` from subdirs like `articles/`).
 - **Default image:** The injector script uses **`gdfn.com-728x90-xyz.gif`** for both top and bottom banners. That file (or a 728×90 replacement) must exist in `source/banner_ads/` so it is copied to `public/banner-ads/` by the build.
 
 ---

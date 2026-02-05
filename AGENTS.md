@@ -14,9 +14,9 @@ This repository (**surfer-static**) is the **GitHub template** for building stat
 
 ## Flow
 
-1. **Content:** Site content lives in `public/`. Add your static HTML, CSS, JS, and assets (e.g. extract a Tailwind template into `public/`).
-2. **Build (optional):** Run `./build.sh` to copy banner assets from `source/banner_ads/` to `public/banner-ads/` and to inject Chatwoot and 728×90 ad banners into target HTML (by default `public/blog/*.html` and `public/science/*.html`). If your template uses other paths, edit the integration scripts.
-3. **Deploy:** Push to `main` or `master`. GitHub Actions runs the “Deploy to Surfer” workflow: it uploads `public/` to the Surfer app using the token from repo secrets. The live site is served at the URL configured in the Surfer app (and set in the repo variable `SURFER_SERVER`).
+1. **Content:** Site content can live in **source/** (articles, pictures, videos) or directly in **public/**. The **template/** folder holds the example site template (e.g. Tailwind 4 CSS + HTML); an LLM uses this as the main site code and organizes/adds articles and images from `source/` into it to build the complete site in `public/`.
+2. **Build (optional):** Run `./build.sh` to copy `source/banner_ads/`, `source/articles/`, `source/pictures/`, and `source/videos/` to the corresponding `public/` paths, then inject Chatwoot and 728×90 ad banners into target HTML (by default `public/articles/*.html`). If your template uses other paths, edit the integration scripts.
+3. **Deploy:** Push to `main` or `master`. GitHub Actions runs the “Deploy to Surfer” workflow: it runs `./build.sh` then `surfer put public/* /` to upload the contents of `public/` to the Surfer app (token from repo secret `SURFER_TOKEN`, server from variable `SURFER_SERVER`).
 
 ---
 
@@ -29,27 +29,33 @@ This repository (**surfer-static**) is the **GitHub template** for building stat
 
 ### On GitHub
 
-1. Create a new repository from this template (Use this template → Create a new repository).
-2. In the new repo: **Settings → Secrets and variables → Actions**.
-3. Add a **repository secret** named `SURFER_TOKEN` and paste the Surfer access token.
-4. Add a **repository variable** named `SURFER_SERVER` with your site URL (e.g. `https://yourdomain.com`).
+1. Create a new repository from this template (Use this template → Create a new repository, or `gh repo create ... --template ...`).
+2. **Option A (CLI):** Put the Surfer token in `local/surfer-token` and site URL in `local/site-url.txt` (copy from `local/*.sample`), then run **`./scripts/setup-deploy.sh`**. The script uses the GitHub CLI to set the repo secret `SURFER_TOKEN` and variable `SURFER_SERVER`.
+3. **Option B (manual):** In the new repo: **Settings → Secrets and variables → Actions** → add secret `SURFER_TOKEN` and variable `SURFER_SERVER`.
 
-GitHub Actions is enabled by default for new repos; the workflow uses these two values. No code changes are required for deploy; only the secret and variable must be set per site.
+GitHub Actions is enabled by default for new repos; the workflow uses these two values. No code changes are required for deploy; only the secret and variable must be set per site. Full stack (GoDaddy → Cloudflare → Cloudron → GitHub) and manual vs automated: [docs/NEW_SITE_FLOW.md](docs/NEW_SITE_FLOW.md).
 
 ---
 
 ## Integrations (optional)
 
-- **Chatwoot:** Embed code lives in `integrations/chatwoot/snippet.html`. The script `integrations/chatwoot/add_chatwoot.py` injects it into target pages (by default before `</body>` in `public/blog/*.html` and `public/science/*.html`). See [integrations/chatwoot/README.md](integrations/chatwoot/README.md) for how to embed and configure.
+- **Chatwoot:** Embed code lives in `integrations/chatwoot/snippet.html`. The script `integrations/chatwoot/add_chatwoot.py` injects it into target pages (by default before `</body>` in `public/articles/*.html`). See [integrations/chatwoot/README.md](integrations/chatwoot/README.md) for how to embed and configure.
 - **Banner ads:** 728×90 (leaderboard) ads for **top header** and **bottom footer**. Assets live in `source/banner_ads/`; the build copies them to `public/banner-ads/`. The script `integrations/add_ad_banners.py` injects a top banner (after `</nav>`) and a bottom banner (before the footer/script block). See [docs/BANNER_ADS.md](docs/BANNER_ADS.md) for placement and how to replace assets.
 
 ---
+
+## Site template (for LLM)
+
+- **template/:** Holds the example site template (e.g. Tailwind 4 CSS + HTML). Put your main site code/theme here. An LLM should use this template together with content from **source/articles/**, **source/pictures/**, and **source/videos/** to build the complete site in **public/** (organize and add articles and images into the theme). See [template/README.md](template/README.md) for instructions.
 
 ## Key documentation
 
 | Doc | Purpose |
 |-----|---------|
 | [README.md](README.md) | Entry point: use template, full setup, build, deploy; refer here for LLM/agent context (this file, AGENTS.md, is the high-level plan). |
+| [template/README.md](template/README.md) | Example site template folder: Tailwind 4 + HTML; LLM uses it + source content to build site in public/. |
+| [docs/QUICKSTART_CLI.md](docs/QUICKSTART_CLI.md) | New site from template using `local/` and `./scripts/setup-deploy.sh` (gh CLI). |
+| [docs/NEW_SITE_FLOW.md](docs/NEW_SITE_FLOW.md) | Full stack (GoDaddy → Cloudflare → Cloudron → GitHub); manual vs automated. |
 | [docs/BUILD_AND_DEPLOY.md](docs/BUILD_AND_DEPLOY.md) | Build order and deploy (Actions, Surfer CLI, local deploy). |
 | [docs/SURFER_TOKEN_SECURITY.md](docs/SURFER_TOKEN_SECURITY.md) | Where the Surfer secret key lives (repo secret); how to set it; do not commit. |
 | [docs/BANNER_ADS.md](docs/BANNER_ADS.md) | 728×90 top header and bottom footer; where they’re placed; how to replace. |
