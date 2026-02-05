@@ -18,14 +18,16 @@ cp -r source/videos/* public/videos/ 2>/dev/null || true
 python3 integrations/chatwoot/add_chatwoot.py
 python3 integrations/add_ad_banners.py
 # Clean URLs: move .html pages into path/index.html so URLs are /faq/, /articles/slug/, etc.
+# Only copy when the source is real content (not a redirect stub), so we never overwrite with a stub.
+is_redirect_stub() { [ -f "$1" ] && [ "$(wc -c < "$1")" -lt 600 ] && grep -q 'content="0;url=' "$1" 2>/dev/null; }
 mkdir -p public/faq public/glossary
 for page in faq glossary; do
-  if [ -f "public/${page}.html" ]; then
+  if [ -f "public/${page}.html" ] && ! is_redirect_stub "public/${page}.html"; then
     cp "public/${page}.html" "public/${page}/index.html" && rm "public/${page}.html"
   fi
 done
 for slug in why-use-vpn secure-browsing-tips vpn-for-streaming vpn-for-travel vpn-vs-proxy; do
-  if [ -f "public/articles/${slug}.html" ]; then
+  if [ -f "public/articles/${slug}.html" ] && ! is_redirect_stub "public/articles/${slug}.html"; then
     mkdir -p "public/articles/${slug}"
     cp "public/articles/${slug}.html" "public/articles/${slug}/index.html" && rm "public/articles/${slug}.html"
   fi
