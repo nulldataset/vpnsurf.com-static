@@ -29,8 +29,8 @@ This repository (**surfer-static**) is the **GitHub template** for building stat
 
 ### On GitHub
 
-1. Create a new repository from this template (Use this template → Create a new repository, or `gh repo create ... --template ...`).
-2. **Option A (CLI):** Put the Surfer token in `local/surfer-token` and site URL in `local/site-url.txt` (copy from `local/*.sample`), then run **`./scripts/setup-deploy.sh`**. The script uses the GitHub CLI to set the repo secret `SURFER_TOKEN` and variable `SURFER_SERVER`.
+1. Create a new repository from this template (Use this template → Create a new repository, or `gh repo create ... --template ...`). **Or** from a local repo with no remote: run **`./scripts/create-repo-and-deploy.sh [REPO_NAME]`** — it creates the GitHub repo, sets `SURFER_TOKEN`/`SURFER_SERVER` from `local/`, and pushes (requires `gh` authenticated; see [docs/CURSOR_GITHUB_AUTOMATION.md](docs/CURSOR_GITHUB_AUTOMATION.md)).
+2. **Option A (CLI):** Put the Surfer token in `local/surfer-token` or `local/surfer-token.txt` and site URL in `local/site-url.txt`, then run **`./scripts/setup-deploy.sh`** (or **`./scripts/create-repo-and-deploy.sh`** if the repo does not exist yet). The scripts use the GitHub CLI to set the repo secret `SURFER_TOKEN` and variable `SURFER_SERVER`.
 3. **Option B (manual):** In the new repo: **Settings → Secrets and variables → Actions** → add secret `SURFER_TOKEN` and variable `SURFER_SERVER`.
 
 GitHub Actions is enabled by default for new repos; the workflow uses these two values. No code changes are required for deploy; only the secret and variable must be set per site. Full stack (GoDaddy → Cloudflare → Cloudron → GitHub) and manual vs automated: [docs/NEW_SITE_FLOW.md](docs/NEW_SITE_FLOW.md).
@@ -55,6 +55,7 @@ GitHub Actions is enabled by default for new repos; the workflow uses these two 
 | [README.md](README.md) | Entry point: use template, full setup, build, deploy; refer here for LLM/agent context (this file, AGENTS.md, is the high-level plan). |
 | [template/README.md](template/README.md) | Example site template folder: Tailwind 4 + HTML; LLM uses it + source content to build site in public/. |
 | [docs/QUICKSTART_CLI.md](docs/QUICKSTART_CLI.md) | New site from template using `local/` and `./scripts/setup-deploy.sh` (gh CLI). |
+| [docs/CURSOR_GITHUB_AUTOMATION.md](docs/CURSOR_GITHUB_AUTOMATION.md) | Cursor IDE and GitHub CLI (gh): why "connected to GitHub" is not enough; use `gh auth login` or `GH_TOKEN` so scripts can create repo and configure Actions. |
 | [docs/NEW_SITE_FLOW.md](docs/NEW_SITE_FLOW.md) | Full stack (GoDaddy → Cloudflare → Cloudron → GitHub); manual vs automated. |
 | [docs/BUILD_AND_DEPLOY.md](docs/BUILD_AND_DEPLOY.md) | Build order and deploy (Actions, Surfer CLI, local deploy). |
 | [docs/SURFER_TOKEN_SECURITY.md](docs/SURFER_TOKEN_SECURITY.md) | Where the Surfer secret key lives (repo secret); how to set it; do not commit. |

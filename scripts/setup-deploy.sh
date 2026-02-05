@@ -7,7 +7,14 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
 cd "$ROOT"
 
-LOCAL_TOKEN="$ROOT/local/surfer-token"
+# Accept surfer-token or surfer-token.txt (both gitignored)
+if [ -f "$ROOT/local/surfer-token" ]; then
+  LOCAL_TOKEN="$ROOT/local/surfer-token"
+elif [ -f "$ROOT/local/surfer-token.txt" ]; then
+  LOCAL_TOKEN="$ROOT/local/surfer-token.txt"
+else
+  LOCAL_TOKEN=""
+fi
 LOCAL_URL="$ROOT/local/site-url.txt"
 
 if ! command -v gh &>/dev/null; then
@@ -16,13 +23,13 @@ if ! command -v gh &>/dev/null; then
 fi
 
 if ! gh repo view &>/dev/null; then
-  echo "Error: Not a GitHub repo or gh not authenticated. Run from the repo root and: gh auth login"
+  echo "Error: Not a GitHub repo or gh not authenticated. Run from the repo root and: gh auth login (or set GH_TOKEN)."
   exit 1
 fi
 
-if [ ! -f "$LOCAL_TOKEN" ]; then
-  echo "Error: $LOCAL_TOKEN not found."
-  echo "Copy local/surfer-token.sample to local/surfer-token and paste your Surfer access token (one line)."
+if [ -z "$LOCAL_TOKEN" ] || [ ! -f "$LOCAL_TOKEN" ]; then
+  echo "Error: Surfer token file not found."
+  echo "Create local/surfer-token or local/surfer-token.txt with one line: your Surfer access token (Surfer app → Settings → Access Token)."
   exit 1
 fi
 
@@ -37,7 +44,7 @@ SURFER_TOKEN=$(tr -d '\n\r' < "$LOCAL_TOKEN")
 SURFER_SERVER=$(tr -d '\n\r' < "$LOCAL_URL" | sed 's|/$||')
 
 if [ -z "$SURFER_TOKEN" ]; then
-  echo "Error: local/surfer-token is empty."
+  echo "Error: Surfer token file ($LOCAL_TOKEN) is empty."
   exit 1
 fi
 

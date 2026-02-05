@@ -5,17 +5,6 @@ set -e
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 cd "$SCRIPT_DIR"
 mkdir -p public
-# Sanitize image metadata in source/pictures so public gets zero-metadata assets
-if ! command -v exiftool >/dev/null 2>&1; then
-  echo "Error: exiftool is required. Install e.g. libimage-exiftool-perl (Debian/Ubuntu) or https://exiftool.org/install.html" >&2
-  exit 1
-fi
-shopt -s nullglob
-picfiles=( source/pictures/*.png source/pictures/*.gif source/pictures/*.jpg source/pictures/*.jpeg )
-if [ ${#picfiles[@]} -gt 0 ]; then
-  exiftool -all= -overwrite_original "${picfiles[@]}"
-fi
-shopt -u nullglob
 # Copy banner ads from source to public
 mkdir -p public/banner-ads
 cp -r source/banner_ads/* public/banner-ads/ 2>/dev/null || true
@@ -28,4 +17,29 @@ cp -r source/pictures/* public/pictures/ 2>/dev/null || true
 cp -r source/videos/* public/videos/ 2>/dev/null || true
 python3 integrations/chatwoot/add_chatwoot.py
 python3 integrations/add_ad_banners.py
+# Clean URLs: move .html pages into path/index.html so URLs are /faq/, /articles/slug/, etc.
+mkdir -p public/faq public/glossary
+for page in faq glossary; do
+  if [ -f "public/${page}.html" ]; then
+    cp "public/${page}.html" "public/${page}/index.html" && rm "public/${page}.html"
+  fi
+done
+for slug in why-use-vpn secure-browsing-tips vpn-for-streaming vpn-for-travel vpn-vs-proxy; do
+  if [ -f "public/articles/${slug}.html" ]; then
+    mkdir -p "public/articles/${slug}"
+    cp "public/articles/${slug}.html" "public/articles/${slug}/index.html" && rm "public/articles/${slug}.html"
+  fi
+done
+# Redirect stubs for old .html URLs (meta refresh + link for crawlers and no-JS users)
+write_redirect() {
+  local file="$1"
+  local path="$2"
+  local label="$3"
+  printf '%s\n' '<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta http-equiv="refresh" content="0;url='"$path"'"><title>Redirect</title></head><body><p>Redirecting to <a href="'"$path"'">'"$label"'</a>.</p></body></html>' > "$file"
+}
+write_redirect "public/faq.html" "/faq/" "FAQ"
+write_redirect "public/glossary.html" "/glossary/" "Glossary"
+for slug in why-use-vpn secure-browsing-tips vpn-for-streaming vpn-for-travel vpn-vs-proxy; do
+  write_redirect "public/articles/${slug}.html" "/articles/${slug}/" "Article"
+done
 echo "Build complete."

@@ -3,6 +3,7 @@ docs/temp/
 
 # Local inputs per site (token + site URL) - never commit
 local/surfer-token
+local/surfer-token.txt
 local/site-url.txt
 
 # macOS
@@ -11,3 +12,6 @@ local/site-url.txt
 # Banner assets: only source/banner_ads is canonical; build copies to public/banner-ads
 public/banner-ads/*
 !public/banner-ads/.gitkeep
+
+# Local mirror of live site (wget) — optional, do not commit
+live-snapshot/

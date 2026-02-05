@@ -17,7 +17,7 @@ This repo is the **surfer-static** GitHub template for building static websites 
 
 **First-time checklist:** [ ] Use template → create repo. [ ] Add content to `public/`. [ ] Set **SURFER_TOKEN** (secret) and **SURFER_SERVER** (variable) in repo Settings → Actions. [ ] Push to `main` or `master`. Optional: [ ] Run `./build.sh` if using Chatwoot or banner ads.
 
-**Quick start from the command line:** Use **`local/`** (token + site URL) and **`./scripts/setup-deploy.sh`** to configure deploy in one step. See [docs/QUICKSTART_CLI.md](docs/QUICKSTART_CLI.md).
+**Quick start from the command line:** Use **`local/`** (token + site URL) and **`./scripts/setup-deploy.sh`** to configure deploy. If you don’t have a GitHub repo yet, run **`./scripts/create-repo-and-deploy.sh [REPO_NAME]`** to create the repo, set secrets, and push (requires [GitHub CLI authenticated](docs/CURSOR_GITHUB_AUTOMATION.md)). See [docs/QUICKSTART_CLI.md](docs/QUICKSTART_CLI.md).
 
 **New site flow (full stack):** GoDaddy → Cloudflare (DNS) → Cloudron (add domain, install Surfer, create token) → new repo from this template → fill `local/surfer-token` and `local/site-url.txt` → run `./scripts/setup-deploy.sh` → push to deploy. Manual vs automated breakdown: [docs/NEW_SITE_FLOW.md](docs/NEW_SITE_FLOW.md).
 
@@ -92,8 +92,10 @@ No need to re-enter the token; the workflow uses the `SURFER_TOKEN` secret.
 | [AGENTS.md](AGENTS.md) | High-level plan for this template (purpose, flow, per-repo config, integrations). **Refer to this for LLM/agent context.** |
 | [docs/QUICKSTART_CLI.md](docs/QUICKSTART_CLI.md) | New site from template using `local/` and `./scripts/setup-deploy.sh` (gh CLI). |
 | [docs/NEW_SITE_FLOW.md](docs/NEW_SITE_FLOW.md) | Full stack: GoDaddy → Cloudflare → Cloudron → Surfer → GitHub; manual vs automated. |
+| [docs/CURSOR_GITHUB_AUTOMATION.md](docs/CURSOR_GITHUB_AUTOMATION.md) | Cursor IDE and GitHub CLI (gh): authenticate so scripts can create repo and configure deploy. |
 | [docs/BUILD_AND_DEPLOY.md](docs/BUILD_AND_DEPLOY.md) | Build order and deploy (Actions, Surfer CLI, local deploy). |
 | [docs/SURFER_TOKEN_SECURITY.md](docs/SURFER_TOKEN_SECURITY.md) | Where the Surfer secret key lives; how to set it. |
 | [docs/BANNER_ADS.md](docs/BANNER_ADS.md) | 728×90 top header and bottom footer; placement; how to replace. |
+| [docs/SEO.md](docs/SEO.md) | SEO review, sitemap/canonical tips, and URL structure (clean URLs without .html). |
 | [integrations/chatwoot/README.md](integrations/chatwoot/README.md) | How to embed Chatwoot; snippet; config; which pages. |
 | [ORGANIZATION.md](ORGANIZATION.md) | Folder layout and doc index. |

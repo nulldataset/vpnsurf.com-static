@@ -15,7 +15,9 @@ This document describes the folder layout for **surfer-static**. The site is rea
 ├── template/                   # Example site template (Tailwind 4 + HTML); LLM uses this + source content to build site in public/
 │   └── README.md               # Purpose and LLM instructions
 ├── scripts/
-│   └── setup-deploy.sh         # Sets GitHub SURFER_TOKEN + SURFER_SERVER from local/
+│   ├── setup-deploy.sh         # Sets GitHub SURFER_TOKEN + SURFER_SERVER from local/
+│   ├── create-repo-and-deploy.sh # Create GitHub repo (if no origin), run setup-deploy, push
+│   └── preview.sh              # Serve public/ at http://localhost:8000
 ├── local/                      # Per-site inputs (gitignored: surfer-token, site-url.txt)
 │   ├── README.txt              # Instructions; copy .sample files and run setup-deploy.sh
 │   ├── surfer-token.sample
@@ -59,10 +61,12 @@ This document describes the folder layout for **surfer-static**. The site is rea
 | [README.md](README.md) | Entry point: use template, setup, build, deploy; links to all docs. Refer to [AGENTS.md](AGENTS.md) for LLM/agent context. |
 | [AGENTS.md](AGENTS.md) | High-level plan: template for Surfer static sites; deploy flow; per-repo config; integrations. |
 | [docs/QUICKSTART_CLI.md](docs/QUICKSTART_CLI.md) | New site from template using `local/` and `./scripts/setup-deploy.sh` (gh CLI). |
+| [docs/CURSOR_GITHUB_AUTOMATION.md](docs/CURSOR_GITHUB_AUTOMATION.md) | Cursor IDE + GitHub CLI (gh auth, GH_TOKEN) for running create-repo-and-deploy.sh. |
 | [docs/NEW_SITE_FLOW.md](docs/NEW_SITE_FLOW.md) | Full stack (GoDaddy → Cloudflare → Cloudron → GitHub); manual vs automated. |
 | [docs/BUILD_AND_DEPLOY.md](docs/BUILD_AND_DEPLOY.md) | Build order and deploy (Actions, Surfer CLI, local deploy). |
 | [docs/SURFER_TOKEN_SECURITY.md](docs/SURFER_TOKEN_SECURITY.md) | Where the Surfer secret key lives (repo secret, local/surfer-token); how to set it; do not commit. |
 | [docs/BANNER_ADS.md](docs/BANNER_ADS.md) | 728×90 top header and bottom footer; where they’re placed; how to replace. |
+| [docs/SEO.md](docs/SEO.md) | SEO review; URL structure (clean URLs without .html). |
 | [integrations/chatwoot/README.md](integrations/chatwoot/README.md) | How to embed Chatwoot; snippet location; config; which pages; how to extend. |
 | [integrations/README.md](integrations/README.md) | Overview of Chatwoot and ad-banner integrations. |
 

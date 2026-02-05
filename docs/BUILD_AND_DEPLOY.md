@@ -18,6 +18,8 @@ This document explains how the site is built locally and how it is deployed via 
 3. **Content folders** — `build.sh` copies `source/articles/`, `source/pictures/`, and `source/videos/` to the corresponding `public/` paths. Add content in source and run `./build.sh` so it is reflected in public before deploy.
 4. **Chatwoot** — `integrations/chatwoot/add_chatwoot.py` injects the Chatwoot script (from `integrations/chatwoot/snippet.html`) into target HTML.
 5. **Ad banners** — `integrations/add_ad_banners.py` injects top/bottom 728×90 ad banners into target HTML.
+6. **Clean URLs** — Build moves `.html` pages into `path/index.html` (e.g. `faq.html` → `faq/index.html`, `articles/slug.html` → `articles/slug/index.html`) so live URLs are `/faq/`, `/articles/slug/`. Injectors run *before* this step so banners/Chatwoot are in the files that become the live pages.
+7. **Redirect stubs** — Minimal `faq.html`, `glossary.html`, and `articles/<slug>.html` are written so old `.html` URLs redirect to the new trailing-slash URLs.
 
 By default both injector scripts target `public/articles/*.html`. If your new template uses different paths or HTML structure, edit the scripts to match.
 
@@ -38,7 +40,7 @@ Before pushing to deploy, you can serve the built site on localhost to check it:
    ```bash
    ./scripts/preview.sh
    ```
-   This serves `public/` at **http://localhost:8000**. Open that URL in your browser (e.g. http://localhost:8000/index.html). Use Ctrl+C to stop the server.
+   This serves `public/` at **http://localhost:8000**. Open that URL in your browser (e.g. http://localhost:8000/ or http://localhost:8000/faq/). After build, clean URLs use trailing slashes (e.g. `/faq/`, `/articles/why-use-vpn/`). Use Ctrl+C to stop the server.
 3. **Push** — When the preview looks good, commit and push to `main` or `master`. GitHub Actions will build and deploy `public/` to the Cloudron Surfer app.
 
 The preview uses Python's built-in `http.server`, so no extra install is needed. It serves the same `public/` contents that Surfer will serve in production.
