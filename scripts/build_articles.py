@@ -43,37 +43,31 @@ def slug_from_filename(name: str) -> str | None:
 
 
 def minimal_md_to_html(text: str) -> str:
-    """Convert markdown to HTML without markdown lib: # title, ## h2, **bold**, paragraphs."""
+    """Convert markdown to HTML without markdown lib: # title, ## h2, **bold**, paragraphs.
+    Outputs single-line <p> blocks for clean rendering."""
     lines = text.split("\n")
     out = []
-    in_para = False
+    current_para: list[str] = []
     for line in lines:
         if line.startswith("# "):
-            if in_para:
-                out.append("</p>")
-                in_para = False
+            if current_para:
+                out.append("<p>" + " ".join(current_para) + "</p>")
+                current_para = []
             out.append(f"<h1>{_escape(line[2:].strip())}</h1>")
         elif line.startswith("## "):
-            if in_para:
-                out.append("</p>")
-                in_para = False
+            if current_para:
+                out.append("<p>" + " ".join(current_para) + "</p>")
+                current_para = []
             out.append(f"<h2 class=\"text-xl font-medium text-white mt-8 mb-2\">{_escape(line[3:].strip())}</h2>")
         elif line.strip() == "":
-            if in_para:
-                out.append("</p>")
-                in_para = False
+            if current_para:
+                out.append("<p>" + " ".join(current_para) + "</p>")
+                current_para = []
         else:
-            if not in_para:
-                out.append("<p>")
-                in_para = True
-            else:
-                out.append(" ")
-            # Simple **bold** and escape
-            out.append(_bold_and_escape(line.strip()))
-    if in_para:
-        out.append("</p>")
+            current_para.append(_bold_and_escape(line.strip()))
+    if current_para:
+        out.append("<p>" + " ".join(current_para) + "</p>")
     html = "\n".join(out)
-    # Add Tailwind classes to common tags
     html = re.sub(r"<strong>", r'<strong class="text-white">', html)
     html = re.sub(r"<a ", r'<a class="text-cyan-400 hover:underline transition-colors duration-200" ', html)
     return html
@@ -90,17 +84,65 @@ def _bold_and_escape(s: str) -> str:
     return s
 
 
+def normalize_body_md(text: str) -> str:
+    """Join line-wrapped paragraphs so output HTML has one flowing paragraph per block.
+    Preserves blank lines (paragraph breaks), headings, and list structure."""
+    blocks = text.split("\n\n")
+    out = []
+    for block in blocks:
+        block = block.strip()
+        if not block:
+            continue
+        # Headings: keep as-is (single line)
+        if block.startswith("#"):
+            out.append(block)
+            continue
+        # List block (starts with - or * or 1. etc.): join continuation lines within each item
+        first = block.split("\n")[0].lstrip()
+        if re.match(r"^[-*]\s", first) or re.match(r"^\d+\.\s", first):
+            # Join lines that don't start a new list item
+            lines = block.split("\n")
+            joined = []
+            current = []
+            for line in lines:
+                if re.match(r"^[\s]*[-*]\s", line) or re.match(r"^[\s]*\d+\.\s", line):
+                    if current:
+                        joined.append(" ".join(x.strip() for x in current if x.strip()))
+                    current = [line.strip()]
+                else:
+                    current.append(line.strip())
+            if current:
+                joined.append(" ".join(x.strip() for x in current if x.strip()))
+            out.append("\n".join(joined))
+            continue
+        # Prose: join all lines with a single space for one flowing paragraph
+        out.append(" ".join(line.strip() for line in block.split("\n") if line.strip()))
+    return "\n\n".join(out)
+
+
 def md_to_html(text: str) -> str:
     """Convert markdown body to HTML with Tailwind-friendly classes."""
     if markdown is not None:
         html = markdown.markdown(
             text,
-            extensions=["extra", "nl2br"],
+            extensions=["extra"],
             output_format="html5",
         )
         html = re.sub(r"<strong>", r'<strong class="text-white">', html)
         html = re.sub(r"<a ", r'<a class="text-cyan-400 hover:underline transition-colors duration-200" ', html)
         html = re.sub(r"<h2>", r'<h2 class="text-xl font-medium text-white mt-8 mb-2">', html)
+        # Collapse newlines inside <p>...</p> so paragraphs render as single blocks
+        html = re.sub(
+            r"<p([^>]*)>(.*?)</p>",
+            lambda m: "<p" + m.group(1) + ">" + m.group(2).replace("\n", " ").strip() + "</p>",
+            html,
+            flags=re.DOTALL,
+        )
+        # Remove newline/space right after opening <p> and before closing </p>
+        html = re.sub(r"(<p[^>]*>)\s+", r"\1", html)
+        html = re.sub(r"\s+</p>", r"</p>", html)
+        # Remove newlines/space between tags
+        html = re.sub(r">\s+<", "><", html)
         return html
     return minimal_md_to_html(text)
 
@@ -117,6 +159,7 @@ def parse_article(md_path: Path) -> tuple[str, str, str]:
             continue
         body_lines.append(line)
     body_md = "\n".join(body_lines).strip()
+    body_md = normalize_body_md(body_md)
     # Excerpt: first paragraph of body (no markdown headers)
     excerpt = ""
     for line in body_md.split("\n"):
@@ -188,7 +231,7 @@ def build_article_html(slug: str, title: str, excerpt: str, body_html: str, hero
                     <figure class="mb-10 rounded-xl overflow-hidden border border-neutral-800 p-1 bg-neutral-900">
                       <img src="../../pictures/{hero_img}" alt="{title_esc}" class="w-full h-64 md:h-80 object-cover rounded-lg"/>
                     </figure>
-                    <div class="text-neutral-300 space-y-6 text-lg leading-relaxed">
+                    <div class="article-body text-neutral-300 space-y-6 text-lg leading-relaxed [&_p]:leading-[1.75] [&_h2]:mt-10 [&_h2]:mb-3 [&_h2]:first:mt-0">
 {body_html}
                     </div>
                   </div>
