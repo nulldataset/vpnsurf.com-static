@@ -25,6 +25,9 @@ jobs:
       - name: Install Surfer CLI
         run: npm install -g cloudron-surfer
 
+      - name: Install Python dependencies
+        run: pip install -r scripts/requirements.txt
+
       - name: Run build
         run: ./build.sh
 

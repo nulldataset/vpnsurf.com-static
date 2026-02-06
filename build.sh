@@ -10,11 +10,13 @@ mkdir -p public/banner-ads
 cp -r source/banner_ads/* public/banner-ads/ 2>/dev/null || true
 # Copy favicon if present
 if [ -f source/favicon.png ]; then cp source/favicon.png public/favicon.png; fi
-# Copy content scaffold from source to public (articles, pictures, videos)
+# Copy content scaffold from source to public (pictures, videos only; articles are built from md)
 mkdir -p public/articles public/pictures public/videos
-cp -r source/articles/* public/articles/ 2>/dev/null || true
 cp -r source/pictures/* public/pictures/ 2>/dev/null || true
 cp -r source/videos/* public/videos/ 2>/dev/null || true
+# Build glossary from 100-term markdown and 10 new articles from numbered markdown (no dates)
+python3 scripts/build_glossary.py
+python3 scripts/build_articles.py
 python3 integrations/chatwoot/add_chatwoot.py
 python3 integrations/add_ad_banners.py
 # Clean URLs: move .html pages into path/index.html so URLs are /faq/, /articles/slug/, etc.
@@ -26,7 +28,8 @@ for page in faq glossary; do
     cp "public/${page}.html" "public/${page}/index.html" && rm "public/${page}.html"
   fi
 done
-for slug in why-use-vpn secure-browsing-tips vpn-for-streaming vpn-for-travel vpn-vs-proxy; do
+ARTICLE_SLUGS="why-use-vpn secure-browsing-tips vpn-for-streaming vpn-for-travel vpn-vs-proxy vpn-privacy-101 vpn-on-ios vpn-on-android vpn-for-movie-streaming vpn-for-steam-and-pc-gaming vpn-for-video-games-consoles-mobile vpn-for-corporate-work vpns-for-traders vpn-for-web3 advanced-vpn-privacy-and-protocols"
+for slug in $ARTICLE_SLUGS; do
   if [ -f "public/articles/${slug}.html" ] && ! is_redirect_stub "public/articles/${slug}.html"; then
     mkdir -p "public/articles/${slug}"
     cp "public/articles/${slug}.html" "public/articles/${slug}/index.html" && rm "public/articles/${slug}.html"
@@ -41,7 +44,7 @@ write_redirect() {
 }
 write_redirect "public/faq.html" "/faq/" "FAQ"
 write_redirect "public/glossary.html" "/glossary/" "Glossary"
-for slug in why-use-vpn secure-browsing-tips vpn-for-streaming vpn-for-travel vpn-vs-proxy; do
+for slug in $ARTICLE_SLUGS; do
   write_redirect "public/articles/${slug}.html" "/articles/${slug}/" "Article"
 done
 echo "Build complete."
