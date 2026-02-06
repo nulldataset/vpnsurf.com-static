@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>VPN &amp; Security Glossary — VPNsurf.com</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="100+ VPN and security terms defined: encryption, kill switch, no-logs, WireGuard, DNS leak, and more. Browse by letter or term.">
+    <link rel="canonical" href="https://vpnsurf.com/glossary/">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.cdnfonts.com/css/inter?styles=135009,135005,135007,135002,135000" rel="stylesheet" />
+    <link rel="stylesheet" href="../css/tailwind/tailwind.min.css">
+    <link rel="icon" type="image/png" sizes="32x32" href="../favicon.png">
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.3/dist/cdn.min.js" defer></script>
+</head>
+<body class="antialiased bg-body text-body font-body">
+    <div class="">
+      <section class="bg-gradient-to-r from-neutral-950 via-neutral-900 to-neutral-950" x-data="{ mobileNavOpen: false }">
+        <div class="container px-4 mx-auto">
+          <nav class="flex justify-between items-center py-8">
+            <a href="../" class="text-xl font-semibold text-transparent bg-clip-text bg-gradient-to-r from-gray-100 to-gray-300">VPNsurf.com</a>
+            <div class="lg:hidden">
+              <button x-on:click="mobileNavOpen = !mobileNavOpen" class="block hover:text-white text-neutral-300 focus:outline-none transition-colors duration-200">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewbox="0 0 20 20"><path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"></path></svg>
+              </button>
+            </div>
+            <ul class="hidden lg:flex ml-auto mr-8 items-center w-auto space-x-8">
+              <li><a class="text-sm hover:text-white font-medium text-neutral-300 transition-colors duration-200" href="../">Home</a></li>
+              <li><a class="text-sm hover:text-white font-medium text-neutral-300 transition-colors duration-200" href="../articles/">Blog</a></li>
+              <li><a class="text-sm hover:text-white font-medium text-neutral-300 transition-colors duration-200" href="../faq/">FAQ</a></li>
+              <li><a class="text-sm hover:text-white font-medium text-neutral-300 transition-colors duration-200" href="./">Glossary</a></li>
+            </ul>
+            <a class="hidden lg:block px-4 py-2 text-sm font-semibold text-neutral-950 bg-white hover:bg-neutral-100 rounded-full transition-all duration-200 hover:shadow-lg" href="#">Get Started</a>
+          </nav>
+          <div class="ad-banner ad-banner-top w-full bg-neutral-900/80 border-y border-neutral-800 py-3">
+            <div class="container px-4 mx-auto max-w-4xl">
+              <a href="https://gdfn.com" target="_blank" rel="noopener noreferrer" class="block rounded-lg overflow-hidden border border-neutral-700 shadow-lg hover:border-neutral-600 transition-colors" aria-label="Advertisement">
+                <img src="../banner-ads/gdfn.com-728x90-xyz.gif" width="728" height="90" alt="Advertisement" class="w-full h-auto block"/>
+              </a>
+            </div>
+          </div>
+          <section class="pt-8 pb-20">
+            <div class="max-w-3xl mx-auto">
+              <h1 class="text-3xl md:text-4xl font-medium text-transparent bg-clip-text bg-gradient-to-r from-gray-100 to-gray-300 mb-2">VPN &amp; security glossary</h1>
+              <p class="text-neutral-400 mb-6">Short definitions for terms we use on VPNsurf.com. Browse by letter or open any term for the full definition and related terms.</p>
+              <nav class="flex flex-wrap gap-1 mb-10" aria-label="Jump to letter">
+                <a href="#letter-A" class="inline-block w-8 h-8 text-center leading-8 rounded hover:bg-neutral-700 text-neutral-300 font-medium">A</a> <a href="#letter-B" class="inline-block w-8 h-8 text-center leading-8 rounded hover:bg-neutral-700 text-neutral-300 font-medium">B</a> <a href="#letter-C" class="inline-block w-8 h-8 text-center leading-8 rounded hover:bg-neutral-700 text-neutral-300 font-medium">C</a> <a href="#letter-D" class="inline-block w-8 h-8 text-center leading-8 rounded hover:bg-neutral-700 text-neutral-300 font-medium">D</a> <a href="#letter-E" class="inline-block w-8 h-8 text-center leading-8 rounded hover:bg-neutral-700 text-neutral-300 font-medium">E</a> <a href="#letter-F" class="inline-block w-8 h-8 text-center leading-8 rounded hover:bg-neutral-700 text-neutral-300 font-medium">F</a> <a href="#letter-G" class="inline-block w-8 h-8 text-center leading-8 rounded hover:bg-neutral-700 text-neutral-300 font-medium">G</a> <a href="#letter-H" class="inline-block w-8 h-8 text-center leading-8 rounded hover:bg-neutral-700 text-neutral-300 font-medium">H</a> <a href="#letter-I" class="inline-block w-8 h-8 text-center leading-8 rounded hover:bg-neutral-700 text-neutral-300 font-medium">I</a> <a href="#letter-J" class="inline-block w-8 h-8 text-center leading-8 rounded hover:bg-neutral-700 text-neutral-300 font-medium">J</a> <a href="#letter-K" class="inline-block w-8 h-8 text-center leading-8 rounded hover:bg-neutral-700 text-neutral-300 font-medium">K</a> <a href="#letter-L" class="inline-block w-8 h-8 text-center leading-8 rounded hover:bg-neutral-700 text-neutral-300 font-medium">L</a> <a href="#letter-M" class="inline-block w-8 h-8 text-center leading-8 rounded hover:bg-neutral-700 text-neutral-300 font-medium">M</a> <a href="#letter-N" class="inline-block w-8 h-8 text-center leading-8 rounded hover:bg-neutral-700 text-neutral-300 font-medium">N</a> <a href="#letter-O" class="inline-block w-8 h-8 text-center leading-8 rounded hover:bg-neutral-700 text-neutral-300 font-medium">O</a> <a href="#letter-P" class="inline-block w-8 h-8 text-center leading-8 rounded hover:bg-neutral-700 text-neutral-300 font-medium">P</a> <a href="#letter-Q" class="inline-block w-8 h-8 text-center leading-8 rounded hover:bg-neutral-700 text-neutral-300 font-medium">Q</a> <a href="#letter-R" class="inline-block w-8 h-8 text-center leading-8 rounded hover:bg-neutral-700 text-neutral-300 font-medium">R</a> <a href="#letter-S" class="inline-block w-8 h-8 text-center leading-8 rounded hover:bg-neutral-700 text-neutral-300 font-medium">S</a> <a href="#letter-T" class="inline-block w-8 h-8 text-center leading-8 rounded hover:bg-neutral-700 text-neutral-300 font-medium">T</a> <a href="#letter-U" class="inline-block w-8 h-8 text-center leading-8 rounded hover:bg-neutral-700 text-neutral-300 font-medium">U</a> <a href="#letter-V" class="inline-block w-8 h-8 text-center leading-8 rounded hover:bg-neutral-700 text-neutral-300 font-medium">V</a> <a href="#letter-W" class="inline-block w-8 h-8 text-center leading-8 rounded hover:bg-neutral-700 text-neutral-300 font-medium">W</a> <a href="#letter-Z" class="inline-block w-8 h-8 text-center leading-8 rounded hover:bg-neutral-700 text-neutral-300 font-medium">Z</a>
+              </nav>
+              <div class="space-y-0">
+              <section id="letter-A" class="mb-12">
+                <h2 class="text-xl font-semibold text-white mb-4 border-b border-neutral-700 pb-2">A</h2>
+                <ul class="space-y-2 text-neutral-300">
+<li><a href="./aes-256-gcm/" class="text-cyan-400 hover:underline">AES-256-GCM</a></li>
+<li><a href="./always-on-vpn/" class="text-cyan-400 hover:underline">Always-On VPN</a></li>
+<li><a href="./authenticated-encryption-aead/" class="text-cyan-400 hover:underline">Authenticated Encryption (AEAD)</a></li>
+                </ul>
+              </section>
+              <section id="letter-B" class="mb-12">
+                <h2 class="text-xl font-semibold text-white mb-4 border-b border-neutral-700 pb-2">B</h2>
+                <ul class="space-y-2 text-neutral-300">
+<li><a href="./bandwidth/" class="text-cyan-400 hover:underline">Bandwidth</a></li>
+<li><a href="./bgp-border-gateway-protocol/" class="text-cyan-400 hover:underline">BGP (Border Gateway Protocol)</a></li>
+<li><a href="./browser-profile-isolation/" class="text-cyan-400 hover:underline">Browser Profile Isolation</a></li>
+                </ul>
+              </section>
+              <section id="letter-C" class="mb-12">
+                <h2 class="text-xl font-semibold text-white mb-4 border-b border-neutral-700 pb-2">C</h2>
+                <ul class="space-y-2 text-neutral-300">
+<li><a href="./captive-portal/" class="text-cyan-400 hover:underline">Captive Portal</a></li>
+<li><a href="./censorship-circumvention/" class="text-cyan-400 hover:underline">Censorship Circumvention</a></li>
+<li><a href="./certificate/" class="text-cyan-400 hover:underline">Certificate</a></li>
+<li><a href="./cgnat-carrier-grade-nat/" class="text-cyan-400 hover:underline">CGNAT (Carrier-Grade NAT)</a></li>
+<li><a href="./chacha20-poly1305/" class="text-cyan-400 hover:underline">ChaCha20-Poly1305</a></li>
+<li><a href="./cookie/" class="text-cyan-400 hover:underline">Cookie</a></li>
+<li><a href="./corporate-vpn-concentrator/" class="text-cyan-400 hover:underline">Corporate VPN Concentrator</a></li>
+                </ul>
+              </section>
+              <section id="letter-D" class="mb-12">
+                <h2 class="text-xl font-semibold text-white mb-4 border-b border-neutral-700 pb-2">D</h2>
+                <ul class="space-y-2 text-neutral-300">
+<li><a href="./data-retention/" class="text-cyan-400 hover:underline">Data Retention</a></li>
+<li><a href="./ddos-distributed-denial-of-service/" class="text-cyan-400 hover:underline">DDoS (Distributed Denial of Service)</a></li>
+<li><a href="./deep-packet-inspection-dpi/" class="text-cyan-400 hover:underline">Deep Packet Inspection (DPI)</a></li>
+<li><a href="./device-fingerprinting/" class="text-cyan-400 hover:underline">Device Fingerprinting</a></li>
+<li><a href="./dmca-notice/" class="text-cyan-400 hover:underline">DMCA Notice</a></li>
+<li><a href="./dns-domain-name-system/" class="text-cyan-400 hover:underline">DNS (Domain Name System)</a></li>
+<li><a href="./dns-leak/" class="text-cyan-400 hover:underline">DNS Leak</a></li>
+<li><a href="./dns-over-https-doh/" class="text-cyan-400 hover:underline">DNS over HTTPS (DoH)</a></li>
+<li><a href="./dns-over-tls-dot/" class="text-cyan-400 hover:underline">DNS over TLS (DoT)</a></li>
+                </ul>
+              </section>
+              <section id="letter-E" class="mb-12">
+                <h2 class="text-xl font-semibold text-white mb-4 border-b border-neutral-700 pb-2">E</h2>
+                <ul class="space-y-2 text-neutral-300">
+<li><a href="./ecdh-elliptic-curve-diffie-hellman/" class="text-cyan-400 hover:underline">ECDH (Elliptic-Curve Diffie-Hellman)</a></li>
+<li><a href="./encryption/" class="text-cyan-400 hover:underline">Encryption</a></li>
+<li><a href="./endpoint-posture/" class="text-cyan-400 hover:underline">Endpoint Posture</a></li>
+                </ul>
+              </section>
+              <section id="letter-F" class="mb-12">
+                <h2 class="text-xl font-semibold text-white mb-4 border-b border-neutral-700 pb-2">F</h2>
+                <ul class="space-y-2 text-neutral-300">
+<li><a href="./firewall/" class="text-cyan-400 hover:underline">Firewall</a></li>
+<li><a href="./fragmentation/" class="text-cyan-400 hover:underline">Fragmentation</a></li>
+<li><a href="./full-tunnel-vpn/" class="text-cyan-400 hover:underline">Full-Tunnel VPN</a></li>
+                </ul>
+              </section>
+              <section id="letter-G" class="mb-12">
+                <h2 class="text-xl font-semibold text-white mb-4 border-b border-neutral-700 pb-2">G</h2>
+                <ul class="space-y-2 text-neutral-300">
+<li><a href="./game-server-vs-p2p-networking/" class="text-cyan-400 hover:underline">Game Server vs P2P Networking</a></li>
+<li><a href="./geo-blocking/" class="text-cyan-400 hover:underline">Geo-Blocking</a></li>
+<li><a href="./geo-gating-web3/" class="text-cyan-400 hover:underline">Geo-Gating (Web3)</a></li>
+                </ul>
+              </section>
+              <section id="letter-H" class="mb-12">
+                <h2 class="text-xl font-semibold text-white mb-4 border-b border-neutral-700 pb-2">H</h2>
+                <ul class="space-y-2 text-neutral-300">
+<li><a href="./hardware-security-key-fido2/" class="text-cyan-400 hover:underline">Hardware Security Key (FIDO2)</a></li>
+<li><a href="./hotspot-tethering/" class="text-cyan-400 hover:underline">Hotspot (Tethering)</a></li>
+<li><a href="./http-proxy/" class="text-cyan-400 hover:underline">HTTP Proxy</a></li>
+                </ul>
+              </section>
+              <section id="letter-I" class="mb-12">
+                <h2 class="text-xl font-semibold text-white mb-4 border-b border-neutral-700 pb-2">I</h2>
+                <ul class="space-y-2 text-neutral-300">
+<li><a href="./ikev2-ipsec/" class="text-cyan-400 hover:underline">IKEv2/IPsec</a></li>
+<li><a href="./independent-audit/" class="text-cyan-400 hover:underline">Independent Audit</a></li>
+<li><a href="./ip-address/" class="text-cyan-400 hover:underline">IP Address</a></li>
+<li><a href="./ipv6/" class="text-cyan-400 hover:underline">IPv6</a></li>
+<li><a href="./ipv6-leak/" class="text-cyan-400 hover:underline">IPv6 Leak</a></li>
+<li><a href="./isp-internet-service-provider/" class="text-cyan-400 hover:underline">ISP (Internet Service Provider)</a></li>
+                </ul>
+              </section>
+              <section id="letter-J" class="mb-12">
+                <h2 class="text-xl font-semibold text-white mb-4 border-b border-neutral-700 pb-2">J</h2>
+                <ul class="space-y-2 text-neutral-300">
+<li><a href="./jitter/" class="text-cyan-400 hover:underline">Jitter</a></li>
+<li><a href="./jurisdiction/" class="text-cyan-400 hover:underline">Jurisdiction</a></li>
+                </ul>
+              </section>
+              <section id="letter-K" class="mb-12">
+                <h2 class="text-xl font-semibold text-white mb-4 border-b border-neutral-700 pb-2">K</h2>
+                <ul class="space-y-2 text-neutral-300">
+<li><a href="./key-exchange/" class="text-cyan-400 hover:underline">Key Exchange</a></li>
+<li><a href="./kill-switch/" class="text-cyan-400 hover:underline">Kill Switch</a></li>
+                </ul>
+              </section>
+              <section id="letter-L" class="mb-12">
+                <h2 class="text-xl font-semibold text-white mb-4 border-b border-neutral-700 pb-2">L</h2>
+                <ul class="space-y-2 text-neutral-300">
+<li><a href="./latency-ping/" class="text-cyan-400 hover:underline">Latency (Ping)</a></li>
+<li><a href="./leak-test/" class="text-cyan-400 hover:underline">Leak Test</a></li>
+<li><a href="./logging-connection-logs/" class="text-cyan-400 hover:underline">Logging (Connection Logs)</a></li>
+                </ul>
+              </section>
+              <section id="letter-M" class="mb-12">
+                <h2 class="text-xl font-semibold text-white mb-4 border-b border-neutral-700 pb-2">M</h2>
+                <ul class="space-y-2 text-neutral-300">
+<li><a href="./malware/" class="text-cyan-400 hover:underline">Malware</a></li>
+<li><a href="./man-in-the-middle-mitm/" class="text-cyan-400 hover:underline">Man-in-the-Middle (MITM)</a></li>
+<li><a href="./metadata/" class="text-cyan-400 hover:underline">Metadata</a></li>
+<li><a href="./mfa-multi-factor-authentication/" class="text-cyan-400 hover:underline">MFA (Multi-Factor Authentication)</a></li>
+<li><a href="./mobile-roaming/" class="text-cyan-400 hover:underline">Mobile Roaming</a></li>
+<li><a href="./mtu-maximum-transmission-unit/" class="text-cyan-400 hover:underline">MTU (Maximum Transmission Unit)</a></li>
+<li><a href="./multi-hop-double-vpn/" class="text-cyan-400 hover:underline">Multi-Hop (Double VPN)</a></li>
+                </ul>
+              </section>
+              <section id="letter-N" class="mb-12">
+                <h2 class="text-xl font-semibold text-white mb-4 border-b border-neutral-700 pb-2">N</h2>
+                <ul class="space-y-2 text-neutral-300">
+<li><a href="./nat-network-address-translation/" class="text-cyan-400 hover:underline">NAT (Network Address Translation)</a></li>
+<li><a href="./nat-type-gaming/" class="text-cyan-400 hover:underline">NAT Type (Gaming)</a></li>
+<li><a href="./no-logs-policy/" class="text-cyan-400 hover:underline">No-Logs Policy</a></li>
+                </ul>
+              </section>
+              <section id="letter-O" class="mb-12">
+                <h2 class="text-xl font-semibold text-white mb-4 border-b border-neutral-700 pb-2">O</h2>
+                <ul class="space-y-2 text-neutral-300">
+<li><a href="./obfuscation/" class="text-cyan-400 hover:underline">Obfuscation</a></li>
+<li><a href="./onion-over-vpn/" class="text-cyan-400 hover:underline">Onion over VPN</a></li>
+<li><a href="./openvpn/" class="text-cyan-400 hover:underline">OpenVPN</a></li>
+                </ul>
+              </section>
+              <section id="letter-P" class="mb-12">
+                <h2 class="text-xl font-semibold text-white mb-4 border-b border-neutral-700 pb-2">P</h2>
+                <ul class="space-y-2 text-neutral-300">
+<li><a href="./p2p-torrenting/" class="text-cyan-400 hover:underline">P2P / Torrenting</a></li>
+<li><a href="./packet-loss/" class="text-cyan-400 hover:underline">Packet Loss</a></li>
+<li><a href="./peering/" class="text-cyan-400 hover:underline">Peering</a></li>
+<li><a href="./perfect-forward-secrecy-pfs/" class="text-cyan-400 hover:underline">Perfect Forward Secrecy (PFS)</a></li>
+<li><a href="./phishing/" class="text-cyan-400 hover:underline">Phishing</a></li>
+<li><a href="./policy-based-routing/" class="text-cyan-400 hover:underline">Policy-Based Routing</a></li>
+<li><a href="./port/" class="text-cyan-400 hover:underline">Port</a></li>
+<li><a href="./port-forwarding/" class="text-cyan-400 hover:underline">Port Forwarding</a></li>
+<li><a href="./private-dns-android/" class="text-cyan-400 hover:underline">Private DNS (Android)</a></li>
+<li><a href="./proxy/" class="text-cyan-400 hover:underline">Proxy</a></li>
+<li><a href="./public-ip-vs-private-ip/" class="text-cyan-400 hover:underline">Public IP vs Private IP</a></li>
+<li><a href="./public-wi-fi-security/" class="text-cyan-400 hover:underline">Public Wi‑Fi Security</a></li>
+                </ul>
+              </section>
+              <section id="letter-Q" class="mb-12">
+                <h2 class="text-xl font-semibold text-white mb-4 border-b border-neutral-700 pb-2">Q</h2>
+                <ul class="space-y-2 text-neutral-300">
+<li><a href="./qos-quality-of-service/" class="text-cyan-400 hover:underline">QoS (Quality of Service)</a></li>
+                </ul>
+              </section>
+              <section id="letter-R" class="mb-12">
+                <h2 class="text-xl font-semibold text-white mb-4 border-b border-neutral-700 pb-2">R</h2>
+                <ul class="space-y-2 text-neutral-300">
+<li><a href="./ram-only-servers/" class="text-cyan-400 hover:underline">RAM-Only Servers</a></li>
+<li><a href="./remote-desktop/" class="text-cyan-400 hover:underline">Remote Desktop</a></li>
+<li><a href="./routing/" class="text-cyan-400 hover:underline">Routing</a></li>
+                </ul>
+              </section>
+              <section id="letter-S" class="mb-12">
+                <h2 class="text-xl font-semibold text-white mb-4 border-b border-neutral-700 pb-2">S</h2>
+                <ul class="space-y-2 text-neutral-300">
+<li><a href="./sase/" class="text-cyan-400 hover:underline">SASE</a></li>
+<li><a href="./server-distance/" class="text-cyan-400 hover:underline">Server Distance</a></li>
+<li><a href="./server-load/" class="text-cyan-400 hover:underline">Server Load</a></li>
+<li><a href="./smart-dns/" class="text-cyan-400 hover:underline">Smart DNS</a></li>
+<li><a href="./sni-ech/" class="text-cyan-400 hover:underline">SNI / ECH</a></li>
+<li><a href="./socks5-proxy/" class="text-cyan-400 hover:underline">SOCKS5 Proxy</a></li>
+<li><a href="./speed-test/" class="text-cyan-400 hover:underline">Speed Test</a></li>
+<li><a href="./split-tunneling/" class="text-cyan-400 hover:underline">Split Tunneling</a></li>
+<li><a href="./stealth-vpn/" class="text-cyan-400 hover:underline">Stealth VPN</a></li>
+<li><a href="./streaming-optimization/" class="text-cyan-400 hover:underline">Streaming Optimization</a></li>
+                </ul>
+              </section>
+              <section id="letter-T" class="mb-12">
+                <h2 class="text-xl font-semibold text-white mb-4 border-b border-neutral-700 pb-2">T</h2>
+                <ul class="space-y-2 text-neutral-300">
+<li><a href="./throttling/" class="text-cyan-400 hover:underline">Throttling</a></li>
+<li><a href="./tls-transport-layer-security/" class="text-cyan-400 hover:underline">TLS (Transport Layer Security)</a></li>
+<li><a href="./tor/" class="text-cyan-400 hover:underline">Tor</a></li>
+<li><a href="./tracking-pixels/" class="text-cyan-400 hover:underline">Tracking Pixels</a></li>
+                </ul>
+              </section>
+              <section id="letter-U" class="mb-12">
+                <h2 class="text-xl font-semibold text-white mb-4 border-b border-neutral-700 pb-2">U</h2>
+                <ul class="space-y-2 text-neutral-300">
+<li><a href="./udp-vs-tcp-for-vpn/" class="text-cyan-400 hover:underline">UDP vs TCP (for VPN)</a></li>
+                </ul>
+              </section>
+              <section id="letter-V" class="mb-12">
+                <h2 class="text-xl font-semibold text-white mb-4 border-b border-neutral-700 pb-2">V</h2>
+                <ul class="space-y-2 text-neutral-300">
+<li><a href="./vpn-virtual-private-network/" class="text-cyan-400 hover:underline">VPN (Virtual Private Network)</a></li>
+<li><a href="./vpn-app-permissions/" class="text-cyan-400 hover:underline">VPN App Permissions</a></li>
+<li><a href="./vpn-client/" class="text-cyan-400 hover:underline">VPN Client</a></li>
+<li><a href="./vpn-server-exit-node/" class="text-cyan-400 hover:underline">VPN Server (Exit Node)</a></li>
+<li><a href="./vpn-tunnel/" class="text-cyan-400 hover:underline">VPN Tunnel</a></li>
+                </ul>
+              </section>
+              <section id="letter-W" class="mb-12">
+                <h2 class="text-xl font-semibold text-white mb-4 border-b border-neutral-700 pb-2">W</h2>
+                <ul class="space-y-2 text-neutral-300">
+<li><a href="./warrant-canary/" class="text-cyan-400 hover:underline">Warrant Canary</a></li>
+<li><a href="./webrtc-leak/" class="text-cyan-400 hover:underline">WebRTC Leak</a></li>
+<li><a href="./wireguard/" class="text-cyan-400 hover:underline">WireGuard</a></li>
+                </ul>
+              </section>
+              <section id="letter-Z" class="mb-12">
+                <h2 class="text-xl font-semibold text-white mb-4 border-b border-neutral-700 pb-2">Z</h2>
+                <ul class="space-y-2 text-neutral-300">
+<li><a href="./ztna/" class="text-cyan-400 hover:underline">ZTNA</a></li>
+                </ul>
+              </section>
+              </div>
+              <p class="mt-12 text-neutral-400 text-sm"><a href="../" class="text-cyan-400 hover:underline">← Back to home</a></p>
+            </div>
+          </section>
+        </div>
+        <div :class="{'block': mobileNavOpen, 'hidden': !mobileNavOpen}" class="hidden fixed top-0 left-0 bottom-0 w-5/6 max-w-sm z-50">
+          <div x-on:click="mobileNavOpen = !mobileNavOpen" class="fixed inset-0 bg-neutral-950 opacity-75 filter blur-3xl"></div>
+          <nav class="relative flex flex-col py-6 px-6 w-full h-full bg-neutral-900 border-r border-neutral-800 overflow-y-auto">
+            <div class="flex items-center mb-12">
+              <a href="../" class="mr-auto text-lg font-semibold text-white">VPNsurf.com</a>
+              <button x-on:click="mobileNavOpen = !mobileNavOpen"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-neutral-400" fill="none" viewbox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg></button>
+            </div>
+            <ul>
+              <li class="mb-1"><a class="block p-4 text-sm font-semibold hover:bg-neutral-800 hover:text-white rounded-lg text-neutral-300" href="../">Home</a></li>
+              <li class="mb-1"><a class="block p-4 text-sm font-semibold hover:bg-neutral-800 hover:text-white rounded-lg text-neutral-300" href="../articles/">Blog</a></li>
+              <li class="mb-1"><a class="block p-4 text-sm font-semibold hover:bg-neutral-800 hover:text-white rounded-lg text-neutral-300" href="../faq/">FAQ</a></li>
+              <li class="mb-1"><a class="block p-4 text-sm font-semibold hover:bg-neutral-800 hover:text-white rounded-lg text-neutral-300" href="./">Glossary</a></li>
+            </ul>
+          </nav>
+        </div>
+      </section>
+
+      <div class="ad-banner ad-banner-bottom w-full bg-neutral-900/80 border-y border-neutral-800 py-3">
+        <div class="container px-4 mx-auto max-w-4xl">
+          <a href="https://gdfn.com" target="_blank" rel="noopener noreferrer" class="block rounded-lg overflow-hidden border border-neutral-700 shadow-lg hover:border-neutral-600 transition-colors" aria-label="Advertisement">
+            <img src="../banner-ads/gdfn.com-728x90-xyz.gif" width="728" height="90" alt="Advertisement" class="w-full h-auto block"/>
+          </a>
+        </div>
+      </div>
+      <footer class="py-20 bg-gradient-to-r from-neutral-950 via-neutral-900 to-neutral-950">
+        <div class="container px-4 mx-auto">
+          <div class="flex flex-wrap -mx-4 mb-8 lg:mb-16">
+            <div class="w-full lg:w-1/3 px-4 mb-12 lg:mb-0">
+              <a class="flex items-center text-white text-xl leading-none font-semibold" href="../"><span class="text-transparent bg-clip-text bg-gradient-to-r from-gray-100 via-gray-300 to-gray-100">VPNsurf.com</span></a>
+              <p class="mt-5 mb-6 max-w-xs text-neutral-300 leading-relaxed">Private, fast VPN for everyday browsing. No logs, no hassle.</p>
+              <div class="text-sm text-neutral-300 space-y-2">
+                <p><a href="mailto:info@vpnsurf.com" class="hover:text-white transition-colors duration-200">info@vpnsurf.com</a></p>
+                <p><a href="tel:+18552892773" class="hover:text-white transition-colors duration-200">1-855-289-2773</a></p>
+                <p><a href="tel:+18552892773" class="hover:text-white transition-colors duration-200">1-855-BUY-ASSET</a></p>
+              </div>
+            </div>
+            <div class="w-full lg:w-2/3 px-4">
+              <div class="flex flex-wrap justify-between">
+                <div class="w-1/2 lg:w-1/4 mb-8 lg:mb-0">
+                  <h3 class="mb-6 text-lg font-medium text-transparent bg-clip-text bg-gradient-to-r from-gray-100 via-gray-200 to-gray-300">Site</h3>
+                  <ul class="text-sm">
+                    <li class="mb-4"><a class="hover:text-white font-medium text-neutral-300 transition-colors duration-200" href="../">Home</a></li>
+                    <li class="mb-4"><a class="hover:text-white font-medium text-neutral-300 transition-colors duration-200" href="../articles/">Blog</a></li>
+                    <li class="mb-4"><a class="hover:text-white font-medium text-neutral-300 transition-colors duration-200" href="../faq/">FAQ</a></li>
+                    <li class="mb-4"><a class="hover:text-white font-medium text-neutral-300 transition-colors duration-200" href="./">Glossary</a></li>
+                  </ul>
+                </div>
+                <div class="w-1/2 lg:w-1/4 mb-8 lg:mb-0">
+                  <h3 class="mb-6 text-lg font-medium text-transparent bg-clip-text bg-gradient-to-r from-gray-100 via-gray-200 to-gray-300">Legal</h3>
+                  <ul class="text-sm">
+                    <li class="mb-4"><a class="hover:text-white font-medium text-neutral-300 transition-colors duration-200" href="#">Privacy</a></li>
+                    <li><a class="hover:text-white font-medium text-neutral-300 transition-colors duration-200" href="#">Terms</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="border-t border-neutral-700 pt-8">
+            <p class="lg:text-center text-sm text-neutral-400">© VPNsurf.com. All rights reserved.</p>
+          </div>
+        </div>
+      </footer>
+    </div>
+</body>
+</html>

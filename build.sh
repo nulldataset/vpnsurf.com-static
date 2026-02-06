@@ -47,4 +47,14 @@ write_redirect "public/glossary.html" "/glossary/" "Glossary"
 for slug in $ARTICLE_SLUGS; do
   write_redirect "public/articles/${slug}.html" "/articles/${slug}/" "Article"
 done
+# Glossary term pages: move glossary/<slug>.html to glossary/<slug>/index.html and add redirect stub
+for f in public/glossary/*.html; do
+  [ -f "$f" ] || continue
+  basename="${f%.html}"
+  basename="${basename##*/}"
+  [ "$basename" != "index" ] || continue
+  mkdir -p "public/glossary/$basename"
+  mv "$f" "public/glossary/$basename/index.html"
+  write_redirect "public/glossary/$basename.html" "/glossary/$basename/" "Term"
+done
 echo "Build complete."

@@ -19,9 +19,12 @@ This document explains how the site is built locally and how it is deployed via 
 4. **Chatwoot** — `integrations/chatwoot/add_chatwoot.py` injects the Chatwoot script (from `integrations/chatwoot/snippet.html`) into target HTML.
 5. **Ad banners** — `integrations/add_ad_banners.py` injects top/bottom 728×90 ad banners into target HTML.
 6. **Clean URLs** — Build moves `.html` pages into `path/index.html` (e.g. `faq.html` → `faq/index.html`, `articles/slug.html` → `articles/slug/index.html`) so live URLs are `/faq/`, `/articles/slug/`. Injectors run *before* this step so banners/Chatwoot are in the files that become the live pages.
-7. **Redirect stubs** — Minimal `faq.html`, `glossary.html`, and `articles/<slug>.html` are written so old `.html` URLs redirect to the new trailing-slash URLs.
+7. **Redirect stubs** — Minimal `faq.html`, `glossary.html`, and `articles/<slug>.html` are written so old `.html` URLs redirect to the new trailing-slash URLs. Glossary term pages get `glossary/<slug>.html` stubs that redirect to `/glossary/<slug>/`.
 
-By default both injector scripts target `public/articles/*.html`. If your new template uses different paths or HTML structure, edit the scripts to match.
+By default the injector scripts target `public/articles/*.html` and also `public/glossary.html` and `public/glossary/*.html`. If your new template uses different paths or HTML structure, edit the scripts to match.
+
+**Restoring flat files for commit (optional)**  
+After a full build, the live tree has `faq/index.html`, `glossary/index.html`, `glossary/<slug>/index.html`, and `articles/<slug>/index.html`. To keep the repo in a “flat” shape so the next CI run has full content to restructure again (and to avoid committing redirect stubs as the main content), you can restore: copy `public/faq/index.html` → `public/faq.html`, remove `public/faq/`; copy `public/glossary/index.html` → `public/glossary.html`; for each glossary term slug, copy `public/glossary/<slug>/index.html` → `public/glossary/<slug>.html` and remove `public/glossary/<slug>/`; remove `public/glossary/index.html`. Do the same for article slugs (copy `public/articles/<slug>/index.html` → `public/articles/<slug>.html`, remove `public/articles/<slug>/`). The build script will overwrite and restructure these flat files on the next run.
 
 **Single command:**
 

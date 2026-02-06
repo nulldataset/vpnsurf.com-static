@@ -32,6 +32,13 @@ def main():
         for f in (PUBLIC / subdir).glob("*.html"):
             if add_to_file(f):
                 count += 1
+    # Glossary index and term pages
+    if (PUBLIC / "glossary.html").exists() and add_to_file(PUBLIC / "glossary.html"):
+        count += 1
+    if (PUBLIC / "glossary").is_dir():
+        for f in (PUBLIC / "glossary").glob("*.html"):
+            if add_to_file(f):
+                count += 1
     print(f"Chatwoot: {count} file(s) updated.")
 
 
